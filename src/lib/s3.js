@@ -18,6 +18,12 @@ const upload = (path, key) => {
   return s3.upload(config)
     .promise()
     .then(res => { // onSuccess
+      // DANGER
+      // we are going to create a picture in the mongoose pic database 
+      // picUrl is going to be res.location
+      // title is going to be key
+      // user is going to be the logged in user
+      // 
       console.log("AWS URL", res.Location);
       return fs.remove(path) // delete local file
         .then(() => res.Location); // resolve s3 url 
